@@ -2,11 +2,12 @@
 -- "archKiss" theme.lua  --
 --      by lgaggini      --
 --      CC BY-SA 3.0     --
+--    Fork by lonefox256 --
 ---------------------------
 
 -- Main
 theme = {}
-home          = "/home/lg"
+home          = "/home/lonefox256" -- Please change this to your home folder.
 config        = home .. "/.config/awesome"
 shared        = "/usr/share/awesome"
 sharedicons   = shared .. "/icons"
@@ -19,9 +20,9 @@ titlebardir   = themedir .. "/titlebar"
 layoutdir     = themedir .. "/layouts"
 icondir       = themedir .. "/icons"
 
--- Fonts
-theme.font          = "sans 9"
-theme.taglist_font = "sans 12"
+-- Fonts (change back to "sans" if you want.)
+theme.font          = "mono 9"
+theme.taglist_font = "mono 12"
 
 -- Main colors
 theme.bg_normal     = "#222222"
@@ -37,6 +38,7 @@ theme.fg_minimize   = "#ffffff"
 
 -- Main borders
 theme.border_width  = "1"
+theme.useless_gap   = "5" -- Useless gap. Remove this line to revert back.
 theme.border_normal = "#000000"
 theme.border_focus  = "#535d6c"
 theme.border_marked = "#91231c"
@@ -103,9 +105,8 @@ theme.titlebar_maximized_button_focus_inactive  = titlebardir  .. "/maximized_fo
 theme.titlebar_maximized_button_normal_active = titlebardir  .. "/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = titlebardir  .. "/maximized_focus_active.png"
 
--- Random wallpaper
-wallpaperdir  = home .. "/.wallpaper/"
-theme.wallpaper_dir = wallpaperdir
+-- Random wallpaper was removed because it didn't work and I don't know how to fix it.
+theme.wallpaper = home .. "/.wallpaper"
 
 -- Layout icons
 theme.layout_fairh = layoutdir .. "/fairh.png"
@@ -120,19 +121,28 @@ theme.layout_tile = layoutdir .. "/tile.png"
 theme.layout_tiletop = layoutdir .. "/tiletop.png"
 theme.layout_spiral  = layoutdir .. "/spiral.png"
 theme.layout_dwindle = layoutdir .. "/dwindle.png"
+-- Added some missing assets.
+theme.layout_cornernw = layoutdir .. "/cornernw.png"
+theme.layout_cornerne = layoutdir .. "/cornerne.png"
+theme.layout_cornersw = layoutdir .. "/cornersw.png"
+theme.layout_cornerse = layoutdir .. "/cornerse.png"
+
+-----------------------------------------------------------------------------------
+--  I removed this because I don't like it. You can uncomment it to add it back. --
+-----------------------------------------------------------------------------------
 
 -- Widget icons
-theme.os = icondir  .. "/os.png"
-theme.music = icondir .. "/music.png"
-theme.music_pause = icondir .. "/music_pause.png"
-theme.mail = icondir .. "/mail.png"
-theme.bat = icondir .. "/bat.png"
-theme.uptime = icondir  .. "/uptime.png"
-theme.cpu = icondir  .. "/cpu.png"
-theme.ram = icondir  .. "/ram.png"
-theme.temp = icondir  .. "/temp.png"
-theme.fs = icondir  .. "/fs.png"
-theme.net = icondir  .. "/net.png"
-theme.cal = icondir  .. "/cal.png"
+-- theme.os = icondir  .. "/os.png"
+-- theme.music = icondir .. "/music.png"
+-- theme.music_pause = icondir .. "/music_pause.png"
+-- theme.mail = icondir .. "/mail.png"
+-- theme.bat = icondir .. "/bat.png"
+-- theme.uptime = icondir  .. "/uptime.png"
+-- theme.cpu = icondir  .. "/cpu.png"
+-- theme.ram = icondir  .. "/ram.png"
+-- theme.temp = icondir  .. "/temp.png"
+-- theme.fs = icondir  .. "/fs.png"
+-- theme.net = icondir  .. "/net.png"
+-- theme.cal = icondir  .. "/cal.png"
 
 return theme
