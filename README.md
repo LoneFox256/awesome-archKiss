@@ -1,4 +1,16 @@
-# Awesome 4.x archKiss
+# archKiss for AwesomeWM 4.3-2 or 4.X
+
+There aren't too many changes. I fixed some bugs I encountered when first using the theme and added my own touch.
+
+### Changes:
+* Changed the font from 'sans' to 'mono'
+* Added a 5px vanity gap
+* Removed the "random wallpaper" (I don't know how to fix it.)
+* Added the missing icons for cornernw, cornerne, cornersw, cornerse
+* Commented out the widget icons
+
+*All changes are listed in the code itself and can be reverted individually if you wish.*
+*No changes were made to the configuration files, just the theme.*
 
 This is my theme and configuration file for Awesome 4.x WM inspired by Archlinux dark colors and KISS (Keep it simple stupid) philosophy. 
 It uses icons from other [great awesome themes](https://github.com/mikar/awesome-themes) (see credits for details).
@@ -87,11 +99,8 @@ poweroff = "sudo poweroff"
 reboot = "sudo reboot"
 ```
 
-## Screenshoot
-
-![archKiss](archKiss.png)
-
 ## Credits
+* lgaggini: the original theme
 * Taglists squares: dust awesome theme by tdy
 * Titlebar icons: zenburn awesome theme by Adrian C. (anrxc)
 * Layout icons: grey-new awesome theme by Andreas Persson (greyscale, grey)
