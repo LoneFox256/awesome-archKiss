@@ -2,9 +2,9 @@
 -- AwesomeWm 4.3-2 configuration for lonefox256 --
 --------------------------------------------------
 -- Custom keybinds on line 293, you can edit them as you wish.
--- Last modified 2020-09-04 11:00:02 GMT-5:00
+-- Last modified 2020-09-04 1:19:40 GMT-5:00
 -- GPL v3 license I guess. This rc.lua is not a fork of archKiss, rather a fork of the default. The theme I use is a fork of archKiss, and it has been modified to be compatible with this file.
--- Reqires scrot as a dependency. Or you could remove lines 247 and 248.
+-- Reqires scrot and slock as a dependency.
 
 
 
@@ -212,7 +212,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "bottom", screen = s }) -- removeiferror
+    s.mywibox = awful.wibar({ position = "bottom", screen = s }) 
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -307,6 +307,8 @@ globalkeys = gears.table.join(
               {description = "open Veracrypt", group = "launcher"}),
     awful.key({ modkey,           }, "w", function () awful.spawn("keepassxc") end,
               {description = "open Keepass", group = "launcher"}),
+    awful.key({ modkey,           }, "Escape", function () awful.spawn("slock") end,
+              {description = "lock screen", group = "awesome"}), -- Lock the screen using Slock. Obviously needs "slock" as a dependency, or you could just remove these lines.
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
@@ -324,7 +326,7 @@ globalkeys = gears.table.join(
               {description = "increase the number of columns", group = "layout"}),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end, -- removeiferror The space key was called "space" that seems to be broken.
+    awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end, 
               {description = "select next", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
@@ -369,7 +371,7 @@ clientkeys = gears.table.join(
         {description = "toggle fullscreen", group = "client"}),
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     , -- removeiferror
+    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     , 
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
