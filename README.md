@@ -1,6 +1,6 @@
 # archKiss for AwesomeWM 4.3-2 or 4.X
 
-There aren't too many changes. I fixed some bugs I encountered when first using the theme and added my own touch.
+There aren't too many changes. I like this theme and this is my own modification to it.
 
 ### Changes:
 * Changed the font from 'sans' to 'mono'
