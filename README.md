@@ -12,6 +12,8 @@ There aren't too many changes. I fixed some bugs I encountered when first using 
 *All changes are listed in the code itself and can be reverted individually if you wish.*
 *No changes were made to the configuration files, just the theme.*
 
+*Please change the home folder in theme.lua and theme_default.lua to your home folder. The wallpaper path is ~/.wallpaper, so you will have to either change it or put a file there.*
+
 This is my theme and configuration file for Awesome 4.x WM inspired by Archlinux dark colors and KISS (Keep it simple stupid) philosophy. 
 It uses icons from other [great awesome themes](https://github.com/mikar/awesome-themes) (see credits for details).
 I using it with GTK adawaita dark theme available for GTK 3 and GTK 2 (and now included in default GTK).
