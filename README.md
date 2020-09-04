@@ -10,7 +10,6 @@ There aren't too many changes. I like this theme and this is my own modification
 * Commented out the widget icons
 
 *All changes are listed in the code itself and can be reverted individually if you wish.*
-*No changes were made to the configuration files, just the theme.*
 
 *Please change the home folder in theme.lua and theme_default.lua to your home folder. The wallpaper path is ~/.wallpaper, so you will have to either change it or put a file there.*
 
