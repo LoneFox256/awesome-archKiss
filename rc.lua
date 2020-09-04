@@ -1,12 +1,20 @@
----------------------------------------------------
---    lonefox256's rc.lua for AwesomeWM 4.3-2    --
----------------------------------------------------
+--------------------------------------------------
+-- AwesomeWm 4.3-2 configuration for lonefox256 --
+--------------------------------------------------
+-- Custom keybinds on line 293, you can edit them as you wish.
+-- Last modified 2020-09-04 11:00:02 GMT-5:00
+-- GPL v3 license I guess. This rc.lua is not a fork of archKiss, rather a fork of the default. The theme I use is a fork of archKiss, and it has been modified to be compatible with this file.
+-- Reqires scrot as a dependency. Or you could remove lines 247 and 248.
+
+
+
+
 
 
 
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
-pcall(require, "luarocks.loader")
+-- pcall(require, "luarocks.loader")
 
 -- Standard awesome library
 local gears = require("gears")
@@ -54,8 +62,9 @@ end
 beautiful.init("/home/lonefox256/.config/awesome/themes/kiss/theme.lua")
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
--- This is used later as the default terminal and editor to run.
+-- You can set default programs here. I use kitty and firefox.
 terminal = "kitty"
+browser = "firefox"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -236,8 +245,10 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
+    awful.key({                   }, "Print", function () awful.util.spawn("scrot -e 'mv $f ~/screenshots/ 2>/dev/null'", false) end,
+              {description = "take screenshot", group = "awesome"}), -- Take screenshot, added directly from the arch wiki.
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
-              {description="show help", group="awesome"}),
+              {description = "show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
@@ -280,8 +291,22 @@ globalkeys = gears.table.join(
         {description = "go back", group = "client"}),
 
     -- Standard program
+
+    -------------------------------------------------------------------------
+    --I have bindings for my most used programs here, you can change them. -- 
+    -------------------------------------------------------------------------
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
+    awful.key({ modkey,           }, "b", function () awful.spawn(browser) end,
+              {description = "open browser", group = "launcher"}),
+    awful.key({ modkey,           }, "d", function () awful.spawn("discord") end,
+              {description = "open Discord", group = "launcher"}),
+    awful.key({ modkey,           }, "g", function () awful.spawn("steam") end,
+              {description = "open Steam", group = "launcher"}),
+    awful.key({ modkey,           }, "q", function () awful.spawn("veracrypt") end,
+              {description = "open Veracrypt", group = "launcher"}),
+    awful.key({ modkey,           }, "w", function () awful.spawn("keepassxc") end,
+              {description = "open Keepass", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,

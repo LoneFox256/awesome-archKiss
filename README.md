@@ -100,6 +100,9 @@ lock = "i3lock-fancy"
 poweroff = "sudo poweroff"
 reboot = "sudo reboot"
 ```
+## Screenshot
+
+![archKiss](archKiss.png)
 
 ## Credits
 * lgaggini: the original theme
@@ -108,3 +111,4 @@ reboot = "sudo reboot"
 * Layout icons: grey-new awesome theme by Andreas Persson (greyscale, grey)
 * Widget icons: sunjack awesome theme by ?
 * Screenshoot wallpaper: [Archlinux wallpaper by giancarlo64](https://www.deviantart.com/giancarlo64/art/ArchLinux-Wallpaper-360078960)
+* Screenshot wallpaper for Lonefox256 fork: [Archlinux wallpaper](https://www.wallpaperaccess.com/download/arch-linux-1776168) (it's a stock image and I wasn't sure how to link it here)
