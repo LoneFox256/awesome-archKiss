@@ -21,24 +21,24 @@ layoutdir     = themedir .. "/layouts"
 icondir       = themedir .. "/icons"
 
 -- Fonts (change back to "sans" if you want.)
-theme.font          = "mono 9"
-theme.taglist_font = "mono 12"
+theme.font          = "liberation mono 12"
+theme.taglist_font = "liberation mono 12"
 
 -- Main colors
 theme.bg_normal     = "#202020"
-theme.bg_focus      = "#202020"
+theme.bg_focus      = "#0090B4" -- This and theme.fg_focus have been changed.
 theme.bg_urgent     = "#303030"
 theme.bg_minimize   = "#101010"
 theme.fg_normal     = "#636363"
-theme.fg_focus      = "#0090B4"
+theme.fg_focus      = "#202020"
 theme.fg_urgent     = "#ff0000"
 theme.fg_minimize   = "#505050"
 
 -- Main borders
-theme.border_width  = "1"
+theme.border_width  = "3" -- Changed this from 1 to 3 as my personal preference.
 theme.useless_gap   = "5" -- Useless gap. Remove this line to revert back.
-theme.border_normal = theme.bg_urgent 
-theme.border_focus  = theme.fg_focus 
+theme.border_normal = theme.bg_normal --Both these lines have been changed to something I think makes more sense.
+theme.border_focus  = theme.bg_focus
 theme.border_marked = "#91231c"
 
 -- Tooltips
@@ -52,7 +52,7 @@ theme.titlebar_bg_normal = theme.bg_normal
 theme.titlebar_bg_focus  = theme.bg_focus
 
 -- Widgets colors
-theme.fg_widget        = "#1994d1"
+-- theme.fg_widget        = "#1994d1"
 
 -- Taglist and Tasklist colors
 theme.taglist_bg_focus = theme.bg_focus
@@ -103,13 +103,13 @@ theme.titlebar_maximized_button_focus_inactive  = titlebardir  .. "/maximized_fo
 theme.titlebar_maximized_button_normal_active = titlebardir  .. "/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = titlebardir  .. "/maximized_focus_active.png"
 
--- Random wallpaper was removed because it didn't work and I don't know how to fix it.
-theme.wallpaper = home .. "/.wallpaper"
+-- I simply removed the random wallpaper from my build, the code wasn't installed in the theme itself anyway, it was installed in lgaggini's rc file, which I didn't keep in this repo.
+theme.wallpaper = themedir .. "/wallpaper"
 
 -- Layout icons
 theme.layout_fairh = layoutdir .. "/fairh.png"
 theme.layout_fairv = layoutdir .. "/fairv.png"
-theme.layout_floating  = layoutdir .. "/floating.png"
+theme.layout_floating  = layoutdir .. "/floating_a.png"
 theme.layout_magnifier = layoutdir .. "/magnifier.png"
 theme.layout_max = layoutdir .. "/max.png"
 theme.layout_fullscreen = layoutdir .. "/fullscreen.png"
@@ -119,24 +119,10 @@ theme.layout_tile = layoutdir .. "/tile.png"
 theme.layout_tiletop = layoutdir .. "/tiletop.png"
 theme.layout_spiral  = layoutdir .. "/spiral.png"
 theme.layout_dwindle = layoutdir .. "/dwindle.png"
--- Added some missing assets.
+-- Added corner layouts with original assets.
 theme.layout_cornernw = layoutdir .. "/cornernw.png"
 theme.layout_cornerne = layoutdir .. "/cornerne.png"
 theme.layout_cornersw = layoutdir .. "/cornersw.png"
 theme.layout_cornerse = layoutdir .. "/cornerse.png"
-
--- Widget icons
--- theme.os = icondir  .. "/os.png"
--- theme.music = icondir .. "/music.png"
--- theme.music_pause = icondir .. "/music_pause.png"
--- theme.mail = icondir .. "/mail.png"
--- theme.bat = icondir .. "/bat.png"
--- theme.uptime = icondir  .. "/uptime.png"
--- theme.cpu = icondir  .. "/cpu.png"
--- theme.ram = icondir  .. "/ram.png"
--- theme.temp = icondir  .. "/temp.png"
--- theme.fs = icondir  .. "/fs.png"
--- theme.net = icondir  .. "/net.png"
--- theme.cal = icondir  .. "/cal.png"
 
 return theme
