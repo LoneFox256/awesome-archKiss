@@ -4,13 +4,7 @@
 -- Custom keybinds on line 293, you can edit them as you wish.
 -- Last modified 2020-09-04 1:19:40 GMT-5:00
 -- GPL v3 license I guess. This rc.lua is not a fork of archKiss, rather a fork of the default. The theme I use is a fork of archKiss, and it has been modified to be compatible with this file.
--- Reqires scrot and slock as a dependency.
-
-
-
-
-
-
+-- Reqires scrot and slock as a dependency. Since 2020-10-6 10:15:42 GMT-5:00, requires batterymon-clone and pasystray as optional dependencies. Or remove lines 93-96
 
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
@@ -62,10 +56,11 @@ end
 beautiful.init("/home/lonefox256/.config/awesome/themes/kiss/theme.lua")
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
--- You can set default programs here. I use kitty and firefox.
-terminal = "kitty"
+-- You can set default programs here. I use st and firefox.
+terminal = "st"
 browser = "firefox"
-editor = os.getenv("EDITOR") or "vim"
+torpaste = "leafpad"
+editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -96,6 +91,11 @@ awful.layout.layouts = {
 }
 -- }}}
 
+-- Finally got initial system tray applets working. You can change these or add more.
+awful.spawn("batterymon -n 20 -c 5")
+awful.spawn("pasystray")
+-- awful.spawn("<your_program_here>")
+
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 -- myawesomemenu = {
@@ -123,7 +123,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+mytextclock = wibox.widget.textclock("%F %T GMT%z", 1)
  
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -221,13 +221,12 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mylauncher,
             s.mytaglist,
+            wibox.widget.systray(),
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
-            wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
     },
@@ -301,8 +300,8 @@ globalkeys = gears.table.join(
               {description = "open browser", group = "launcher"}),
     awful.key({ modkey,           }, "d", function () awful.spawn("discord") end,
               {description = "open Discord", group = "launcher"}),
-    awful.key({ modkey,           }, "g", function () awful.spawn("steam") end,
-              {description = "open Steam", group = "launcher"}),
+    awful.key({ modkey,           }, "g", function () awful.spawn("lutris") end,
+              {description = "open Lutris", group = "launcher"}),
     awful.key({ modkey,           }, "q", function () awful.spawn("veracrypt") end,
               {description = "open Veracrypt", group = "launcher"}),
     awful.key({ modkey,           }, "w", function () awful.spawn("keepassxc") end,
@@ -311,6 +310,10 @@ globalkeys = gears.table.join(
               {description = "lock screen", group = "awesome"}), -- Lock the screen using Slock. Obviously needs "slock" as a dependency, or you could just remove these lines.
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
+    awful.key({ modkey, "Shift"   }, "e", function () awful.spawn("launch_tor")end,
+              {description = "open Tor Browser", group = "launcher"}),
+    awful.key({ modkey,           }, "e", function () awful.spawn(torpaste) end,
+              {description = "open GUI text editor", group = "launcher"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
 
@@ -326,11 +329,10 @@ globalkeys = gears.table.join(
               {description = "increase the number of columns", group = "layout"}),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end, 
+    awful.key({ modkey,           }, "a", function () awful.layout.inc( 1)                end, 
               {description = "select next", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
+    awful.key({ modkey, "Shift"   }, "a", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
-
     awful.key({ modkey, "Control" }, "n",
               function ()
                   local c = awful.client.restore()
@@ -361,7 +363,6 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})
 )
-
 clientkeys = gears.table.join(
     awful.key({ modkey,           }, "f",
         function (c)
@@ -371,7 +372,7 @@ clientkeys = gears.table.join(
         {description = "toggle fullscreen", group = "client"}),
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     , 
+    awful.key({ modkey, "Control" }, "a",  awful.client.floating.toggle                     , 
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
@@ -405,7 +406,6 @@ clientkeys = gears.table.join(
         end ,
         {description = "(un)maximize horizontally", group = "client"})
 )
-
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
@@ -507,6 +507,7 @@ awful.rules.rules = {
           "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
           "Wpa_gui",
           "veromix",
+	  "IHU",
           "xtightvncviewer"},
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
@@ -523,7 +524,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
+      }, properties = { titlebars_enabled = false }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -586,6 +587,7 @@ client.connect_signal("request::titlebars", function(c)
         layout = wibox.layout.align.horizontal
     }
 end)
+
 
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)
