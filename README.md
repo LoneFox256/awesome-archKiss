@@ -2,8 +2,6 @@
 
 Making this fork was probably a mistake, because at the time I didn't know much about Github and I had just joined, but I'll try to make the best of it.
 
-*Please change the home folder in theme.lua and theme_default.lua to your home folder. The wallpaper path is ~/.wallpaper, so you will have to either change it or put a file there.*
-
 ## Screenshot
 
 ![archKiss](archKiss.png)
@@ -37,4 +35,4 @@ Any fixes in the form of pull requests are welcome.
 * Wallpaper used in screenshot:
 	[https://www.gnome-look.org/p/1319236](https://www.gnome-look.org/p/1319236)
 	Author: Charlie Henson - https://www.pling.com/u/charlie-henson/
-	License: (none that I managed to find)
+	License: Creative Commons Attribution
