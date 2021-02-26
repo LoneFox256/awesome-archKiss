@@ -4,8 +4,7 @@
 -- Custom keybinds on line 293, you can edit them as you wish.
 -- Last modified 2020-09-04 1:19:40 GMT-5:00
 -- GPL v3 license I guess. This rc.lua is not a fork of archKiss, rather a fork of the default. The theme I use is a fork of archKiss, and it has been modified to be compatible with this file.
--- Reqires scrot and slock as a dependency. Since 2020-10-6 10:15:42 GMT-5:00, requires batterymon-clone and pasystray as optional dependencies. Or remove lines 93-96
-
+-- Reqires scrot and slock as a dependency. Since 2020-10-6 10:15:42 GMT-5:00
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 -- pcall(require, "luarocks.loader")
@@ -53,15 +52,19 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/home/lonefox256/.config/awesome/themes/kiss/theme.lua")
+beautiful.init("~/.config/awesome/themes/kiss/theme.lua")
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- You can set default programs here. I use st and firefox.
 terminal = "st"
 browser = "firefox"
+browser2 = "brave"
+email = "neomutt"
+email_cmd = terminal .. " -e " .. email
 torpaste = "leafpad"
 editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
+script = "/home/lonefox256/.config/awesome/scripts/" -- Directory where you place scripts to be bound to a key.
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -92,31 +95,11 @@ awful.layout.layouts = {
 -- }}}
 
 -- Finally got initial system tray applets working. You can change these or add more.
-awful.spawn("batterymon -n 20 -c 5")
-awful.spawn("pasystray")
 -- awful.spawn("<your_program_here>")
 
--- {{{ Menu
--- Create a launcher widget and a main menu
--- myawesomemenu = {
---    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
---    { "manual", terminal .. " -e man awesome" },
---    { "edit config", editor_cmd .. " " .. awesome.conffile },
---    { "restart", awesome.restart },
---    { "quit", function() awesome.quit() end },
--- }
-
--- mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
---                                     { "open terminal", terminal }
---                                   }
---                         })
-
--- mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
---                                      menu = mymainmenu })
-
 -- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it.
--- }}}
+menubar.utils.terminal = terminal -- Set the terminal for applications that require it
+
 
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
@@ -212,7 +195,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "bottom", screen = s }) 
+    s.mywibox = awful.wibar({ position = "top", screen = s }) 
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -298,8 +281,12 @@ globalkeys = gears.table.join(
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey,           }, "b", function () awful.spawn(browser) end,
               {description = "open browser", group = "launcher"}),
-    awful.key({ modkey,           }, "d", function () awful.spawn("discord") end,
-              {description = "open Discord", group = "launcher"}),
+    awful.key({ modkey, "Shift"   }, "b", function () awful.spawn(browser2) end,
+              {description = "open secondary browser", group = "launcher"}),
+    awful.key({ modkey,           }, "d", function () awful.spawn("jami-gnome") end,
+              {description = "open Jami", group = "launcher"}),
+    awful.key({ modkey, "Shift"   }, "d", function () awful.spawn("signal-desktop") end,
+              {description = "open Signal", group = "launcher"}),
     awful.key({ modkey,           }, "g", function () awful.spawn("lutris") end,
               {description = "open Lutris", group = "launcher"}),
     awful.key({ modkey,           }, "q", function () awful.spawn("veracrypt") end,
@@ -310,13 +297,24 @@ globalkeys = gears.table.join(
               {description = "lock screen", group = "awesome"}), -- Lock the screen using Slock. Obviously needs "slock" as a dependency, or you could just remove these lines.
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
-    awful.key({ modkey, "Shift"   }, "e", function () awful.spawn("launch_tor")end,
-              {description = "open Tor Browser", group = "launcher"}),
+    awful.key({ modkey, "Shift"   }, "e", function () awful.spawn(script .. "launch_tor")end,
+              {description = "open Tor Browser (script)", group = "launcher"}),
     awful.key({ modkey,           }, "e", function () awful.spawn(torpaste) end,
               {description = "open GUI text editor", group = "launcher"}),
+    awful.key({ modkey,           }, "v", function () awful.spawn("gimp") end,
+              {description = "open Gimp", group = "launcher"}),
+    awful.key({ modkey, "Shift"   }, "z", function () awful.spawn("st -e " .. script .. "weather") end,
+              {description = "show wttr.in (script)", group = "launcher"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
-
+--    awful.key({ modkey,           }, "t", function () awful.spawn(script .. "multioff") end,
+--              {description = "disable multihead, edp (script)", group = "layout"}),
+--    awful.key({ modkey, "Shift"   }, "t", function () awful.spawn(script .. "multioff2") end,
+--              {description = "disable multihead, hdmi (script)", group = "layout"}),
+--    awful.key({ modkey,           }, "i", function () awful.spawn(script .. "multiabove") end,
+--              {description = "enable multihead, primary above secondary (script)", group = "layout"}),
+--    awful.key({ modkey, "Shift"   }, "i", function () awful.spawn(script .. "multiright") end,
+--              {description = "enable multihead, primary right of secondary (script)", group = "layout"}), 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
@@ -333,6 +331,8 @@ globalkeys = gears.table.join(
               {description = "select next", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "a", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
+    awful.key({ modkey, "Control" }, "b", function () awful.spawn(email_cmd) end,
+              {description = "launch email client (script)", group = "launcher"}),
     awful.key({ modkey, "Control" }, "n",
               function ()
                   local c = awful.client.restore()

@@ -1,6 +1,7 @@
 # archKiss for AwesomeWM 4.3-2 or 4.X
 
 Making this fork was probably a mistake, because at the time I didn't know much about Github and I had just joined, but I'll try to make the best of it.
+The latest commit is just a quick update because I haven't updated this in a while, and I have new changes and fixes, mostly from the rc.lua file.
 
 ## Screenshot
 
@@ -10,23 +11,27 @@ Making this fork was probably a mistake, because at the time I didn't know much 
 ### Finally, I decided to list all the modules that this repo uses to work fully right here, so your job is easier. Note that not all these are completely necessary, and many of them are just apps that I bound to a key combo.
 * st - Default terminal
 * firefox - Default browser
+* brave - Second browser (I have multiple)
+* neomutt - Default email client
 * nvim - Default text editor
-* batterymon-clone (AUR) - System tray applet
-* pasystray - System tray applet
 * scrot - To take screenshots with the Print key
 * slock - To lock the screen using Super+Esc
 ### Apps I use that were bounded to a key in rc.lua:
-* discord - Discord messenger (Pretty trash but all my friends use it so I had to, I'm sorry)
-* lutris - Lutris game manager
-* veracrypt - I need this to manage my encrypted external hard drive
-* keepassxc - I use this as my personal password manager
-* I use Tor Browser and have a keybind to open it, however, I have to use a workaround by creating a script in $PATH called "launch_tor" that starts Tor for me with Super+Shift+e, so if you use this, you will have to create the same script.
-* leafpad - GUI text editor used as a pastebin along with Tor browser
+* jami-gnome - Bound to modkey+D
+* signal-desktop - Bound to modkey+Shift+D
+* lutris - Bound to modkey+G
+* veracrypt - Bound to modkey+Q
+* keepassxc - Bound to modkey+W
+* gimp - Bound to modkey+V
+* leafpad - People tell me that when I'm using Tor Browser, I should only type text into a separate window and paste it into the browser to avoid fingerprinting, so I use this editor instead of nvim because it works better for that purpose.
 
-## Workarounds
-* If you want to use Tor Browser, create a script called $PATH/launch_tor, that starts Tor Browser. I have trouble launching the .desktop file directly.
-* You may have to create the directory called ~/screenshots yourself, because when I configure rc.lua to do that automatically, it breaks.
-Any fixes in the form of pull requests are welcome.
+## Scripts
+The rc.lua makes references to many scripts, as I have decided that scripts that I use (including launch\_tor), will be included with this repository. This makes the configs easier to implement and more extensible. Just make sure you update the location that rc.lua looks for scripts after downloading.
+* launch\_tor - Starts the Tor Browser, using a script, because I have had difficulty getting it to run with a single command.
+* multiabove,multioff,multioff2,multiright - These are what I use to manage my multihead setup. I have the keybinds commented out in the rc.lua itself, but if you are going to use these, make sure you change eDP-1 and HDMI-1 to something else depending on what you get from running xrandr, or change the commands entirely if you don't use xrandr.
+* weather - A small script that displays information from the wttr.in service. I used to have this coupled with a doppler radar script until that service got discontinued.
+
+Please fork or pull request if you have a way to not excessively use awful.spawn for every keybind that isn't there by default.
 
 ## Credits
 * Github - lgaggini: the original theme
@@ -36,3 +41,5 @@ Any fixes in the form of pull requests are welcome.
 	[https://www.gnome-look.org/p/1319236](https://www.gnome-look.org/p/1319236)
 	Author: Charlie Henson - https://www.pling.com/u/charlie-henson/
 	License: Creative Commons Attribution
+* Widget icons: sunjack awesome theme by ?
+* Titlebar icons: zenburn awesome theme by Adrian C. (anrxc)
