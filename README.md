@@ -23,7 +23,6 @@ The latest commit is just a quick update because I haven't updated this in a whi
 * veracrypt - Bound to modkey+Q
 * keepassxc - Bound to modkey+W
 * gimp - Bound to modkey+V
-* leafpad - People tell me that when I'm using Tor Browser, I should only type text into a separate window and paste it into the browser to avoid fingerprinting, so I use this editor instead of nvim because it works better for that purpose.
 
 ## Scripts
 The rc.lua makes references to many scripts, as I have decided that scripts that I use (including launch\_tor), will be included with this repository. This makes the configs easier to implement and more extensible. Just make sure you update the location that rc.lua looks for scripts after downloading.

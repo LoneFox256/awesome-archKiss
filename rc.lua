@@ -61,7 +61,7 @@ browser = "firefox"
 browser2 = "brave"
 email = "neomutt"
 email_cmd = terminal .. " -e " .. email
-torpaste = "leafpad"
+torpaste = "st -e nvim"
 editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 script = "/home/lonefox256/.config/awesome/scripts/" -- Directory where you place scripts to be bound to a key.
@@ -168,7 +168,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -293,7 +293,7 @@ globalkeys = gears.table.join(
               {description = "open Veracrypt", group = "launcher"}),
     awful.key({ modkey,           }, "w", function () awful.spawn("keepassxc") end,
               {description = "open Keepass", group = "launcher"}),
-    awful.key({ modkey,           }, "Escape", function () awful.spawn("slock") end,
+    awful.key({ modkey,           }, ".", function () awful.spawn("slock") end,
               {description = "lock screen", group = "awesome"}), -- Lock the screen using Slock. Obviously needs "slock" as a dependency, or you could just remove these lines.
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
@@ -307,14 +307,14 @@ globalkeys = gears.table.join(
               {description = "show wttr.in (script)", group = "launcher"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
---    awful.key({ modkey,           }, "t", function () awful.spawn(script .. "multioff") end,
---              {description = "disable multihead, edp (script)", group = "layout"}),
---    awful.key({ modkey, "Shift"   }, "t", function () awful.spawn(script .. "multioff2") end,
---              {description = "disable multihead, hdmi (script)", group = "layout"}),
---    awful.key({ modkey,           }, "i", function () awful.spawn(script .. "multiabove") end,
---              {description = "enable multihead, primary above secondary (script)", group = "layout"}),
---    awful.key({ modkey, "Shift"   }, "i", function () awful.spawn(script .. "multiright") end,
---              {description = "enable multihead, primary right of secondary (script)", group = "layout"}), 
+    awful.key({ modkey,           }, "t", function () awful.spawn(script .. "multioff") end,
+              {description = "disable multihead, edp (script)", group = "layout"}),
+    awful.key({ modkey, "Shift"   }, "t", function () awful.spawn(script .. "multioff2") end,
+              {description = "disable multihead, hdmi (script)", group = "layout"}),
+    awful.key({ modkey,           }, "i", function () awful.spawn(script .. "multiabove") end,
+              {description = "enable multihead, primary above secondary (script)", group = "layout"}),
+    awful.key({ modkey, "Shift" }, "i", function () awful.spawn(script .. "multiright") end,
+              {description = "enable multihead, primary right of secondary (script)", group = "layout"}), 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
@@ -344,6 +344,42 @@ globalkeys = gears.table.join(
                   end
               end,
               {description = "restore minimized", group = "client"}),
+
+    
+    -- Set layout instead of incrementing it
+    awful.key({ modkey, "Control" }, "q", function () awful.layout.set(awful.layout.suit.tile) end,
+              {description = "set layout tile", group = "layout"}),
+    awful.key({ modkey, "Control" }, "w", function () awful.layout.set(awful.layout.suit.tile.left) end,
+              {description = "set layout tileleft", group = "layout"}),
+    awful.key({ modkey, "Control" }, "e", function () awful.layout.set(awful.layout.suit.tile.bottom) end,
+              {description = "set layout tilebottom", group = "layout"}),
+    awful.key({ modkey, "Control" }, "s", function () awful.layout.set(awful.layout.suit.tile.top) end,
+              {description = "set layout tiletop", group = "layout"}),
+    awful.key({ modkey, "Control" }, "d", function () awful.layout.set(awful.layout.suit.floating) end,
+              {description = "set layout floating", group = "layout"}),
+    awful.key({ modkey, "Control" }, "f", function () awful.layout.set(awful.layout.suit.fair) end,
+              {description = "set layout fair", group = "layout"}),
+    awful.key({ modkey, "Control" }, "g", function () awful.layout.set(awful.layout.suit.fair.horizontal) end,
+              {description = "set layout fairv", group = "layout"}),
+    awful.key({ modkey, "Control" }, "t", function () awful.layout.set(awful.layout.suit.spiral) end,
+              {description = "set layout spiral", group = "layout"}),
+    awful.key({ modkey, "Control" }, "y", function () awful.layout.set(awful.layout.suit.spiral.dwindle) end,
+              {description = "set layout dwindle", group = "layout"}),
+    awful.key({ modkey, "Control" }, "u", function () awful.layout.set(awful.layout.suit.max) end,
+              {description = "set layout max", group = "layout"}),
+    awful.key({ modkey, "Control" }, "i", function () awful.layout.set(awful.layout.suit.max.fullscreen) end,
+              {description = "set layout fullscreen", group = "layout"}),
+    awful.key({ modkey, "Control" }, "o", function () awful.layout.set(awful.layout.suit.magnifier) end,
+              {description = "set layout magnifier", group = "layout"}),
+    awful.key({ modkey, "Control" }, "z", function () awful.layout.set(awful.layout.suit.corner.nw) end,
+              {description = "set layout cornernw", group = "layout"}),
+    awful.key({ modkey, "Control" }, "x", function () awful.layout.set(awful.layout.suit.corner.ne) end,
+              {description = "set layout cornerne", group = "layout"}),
+    awful.key({ modkey, "Control" }, "c", function () awful.layout.set(awful.layout.suit.corner.sw) end,
+              {description = "set layout cornersw", group = "layout"}),
+    awful.key({ modkey, "Control" }, "v", function () awful.layout.set(awful.layout.suit.corner.se) end,
+              {description = "set layout cornerse", group = "layout"}),
+
 
     -- Prompt
     awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
@@ -412,7 +448,7 @@ clientkeys = gears.table.join(
 for i = 1, 9 do
     globalkeys = gears.table.join(globalkeys,
         -- View tag only.
-        awful.key({ modkey }, "#" .. i + 9,
+        awful.key({ modkey }, i,
                   function ()
                         local screen = awful.screen.focused()
                         local tag = screen.tags[i]
@@ -422,7 +458,7 @@ for i = 1, 9 do
                   end,
                   {description = "view tag #"..i, group = "tag"}),
         -- Toggle tag display.
-        awful.key({ modkey, "Control" }, "#" .. i + 9,
+        awful.key({ modkey, "Control" }, i,
                   function ()
                       local screen = awful.screen.focused()
                       local tag = screen.tags[i]
@@ -432,7 +468,7 @@ for i = 1, 9 do
                   end,
                   {description = "toggle tag #" .. i, group = "tag"}),
         -- Move client to tag.
-        awful.key({ modkey, "Shift" }, "#" .. i + 9,
+        awful.key({ modkey, "Shift" }, i,
                   function ()
                       if client.focus then
                           local tag = client.focus.screen.tags[i]
@@ -443,7 +479,7 @@ for i = 1, 9 do
                   end,
                   {description = "move focused client to tag #"..i, group = "tag"}),
         -- Toggle tag on focused client.
-        awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
+        awful.key({ modkey, "Control", "Shift" }, i,
                   function ()
                       if client.focus then
                           local tag = client.focus.screen.tags[i]
@@ -455,6 +491,51 @@ for i = 1, 9 do
                   {description = "toggle focused client on tag #" .. i, group = "tag"})
     )
 end
+
+globalkeys = gears.table.join(globalkeys,
+        -- View tag only.
+        awful.key({ modkey }, "0",
+                  function ()
+                        local screen = awful.screen.focused()
+                        local tag = screen.tags[10]
+                        if tag then
+                           tag:view_only()
+                        end
+                  end,
+                  {description = "view tag #0", group = "tag"}),
+        -- Toggle tag display.
+        awful.key({ modkey, "Control" }, "0",
+                  function ()
+                      local screen = awful.screen.focused()
+                      local tag = screen.tags[10]
+                      if tag then
+                         awful.tag.viewtoggle(tag)
+                      end
+                  end,
+                  {description = "toggle tag #0", group = "tag"}),
+        -- Move client to tag.
+        awful.key({ modkey, "Shift" }, "0",
+                  function ()
+                      if client.focus then
+                          local tag = client.focus.screen.tags[10]
+                          if tag then
+                              client.focus:move_to_tag(tag)
+                          end
+                     end
+                  end,
+                  {description = "move focused client to tag #0", group = "tag"}),
+        -- Toggle tag on focused client.
+        awful.key({ modkey, "Control", "Shift" }, "0",
+                  function ()
+                      if client.focus then
+                          local tag = client.focus.screen.tags[10]
+                          if tag then
+                              client.focus:toggle_tag(tag)
+                          end
+                      end
+                  end,
+                  {description = "toggle focused client on tag #0", group = "tag"})
+    )
 
 clientbuttons = gears.table.join(
     awful.button({ }, 1, function (c)
@@ -524,7 +605,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = false }
+      }, properties = { titlebars_enabled = false}
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
